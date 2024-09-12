@@ -11,4 +11,5 @@ jobs:
           python-version: '3.12' 
       - run: uname -a
       - run: lsb_release --all
+      - run: pytest
 
