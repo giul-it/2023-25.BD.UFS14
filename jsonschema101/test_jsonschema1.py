@@ -31,7 +31,21 @@ def validate_wrapper(instance, schema):
         return True
     except:
         return False
+    
+
 def test_function_output_with_snapshot(snapshot):
     snapshot.snapshot_dir = 'snapshots'  # This line is optional.
-    pierino = str(func(3))
-    snapshot.assert_match(pierino, 'foo_output.txt')    
+    x = str(func(3))
+    snapshot.assert_match(x, 'foo_output.txt')    
+
+a = """frutti,prezzo,colore
+pera,100,gialla
+mela,10,verde
+banana,20,gialla
+arancia,60,arancione
+papaya,40,rossa"""
+
+def test_function_output_with_snapshot(snapshot):
+    snapshot.snapshot_dir = 'snapshots'  # This line is optional.
+    x = a
+    snapshot.assert_match(x, 'frutti.csv')  
