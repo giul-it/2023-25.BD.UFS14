@@ -3,13 +3,13 @@
 # content of test_sample.py
 from jsonschema import validate
 
-'''#primo test
+#primo test
 def func(x):
     return x + 1
 
 
 def test_answer():
-    assert func(3) == 4'''
+    assert func(3) == 4
 
 #secondo test
 schema = {
@@ -31,3 +31,7 @@ def validate_wrapper(instance, schema):
         return True
     except:
         return False
+def test_function_output_with_snapshot(snapshot):
+    snapshot.snapshot_dir = 'snapshots'  # This line is optional.
+    pierino = str(func(3))
+    snapshot.assert_match(pierino, 'foo_output.txt')    
