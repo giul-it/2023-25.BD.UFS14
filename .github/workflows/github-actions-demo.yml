@@ -14,5 +14,6 @@ jobs:
       - run: uname -a
       - run: lsb_release --all
       - run: pip install -U pytest
+      - run: pip install -r requirements.txt
       - run: pytest
 
