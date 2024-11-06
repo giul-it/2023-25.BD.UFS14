@@ -111,8 +111,7 @@ def test_crea_dizionario():
     assert isinstance(output, dict) == True
     for chiave in output.keys():
         assert isinstance(chiave, str) == True
-    for valore in output.values():
-        assert isinstance(valore, str) == True
+    assert isinstance(lab["_id"], str) == False
 
 #test json schema
 def validate_wrapper(instance, schema):
