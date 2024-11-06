@@ -1,6 +1,5 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import pymongo
 
 
 #print(ingredienti)
@@ -19,12 +18,13 @@ def sperofunzioni(z):
     client = MongoClient(uri, server_api=ServerApi('1'))
     db = client['INCI']
     d = db.Ingredienti.find({}, {"_id":0, "Nome_comune":1})
-    print(type(d))
+    #print(type(d))
     ingredienti = transform_cursor_to_list(d)
     y = ingredienti[z]
     bho = db.Ingredienti.find_one(y)
     return bho
 
 
-#print(sperofunzioni(11))
+print(type((sperofunzioni(11))))
+print(sperofunzioni(11))
 

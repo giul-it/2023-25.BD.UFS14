@@ -1,6 +1,32 @@
 
 from MyProjFolder.mongo_database import sperofunzioni, transform_cursor_to_list
 from jsonschema import validate
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+
+
+#print(ingredienti)
+
+
+
+def transform_cursor_to_list(collection):
+    ingredienti = []
+    for x in collection: 
+        ingredienti.append(x)
+    return ingredienti
+
+
+def sperofunzioni(z):
+    uri = "mongodb+srv://lucagiovagnoli:t7g^Fyi7zpN!Liw@ufs13.dsmvdrx.mongodb.net/?retryWrites=true&w=majority&appName=UFS13"
+    client = MongoClient(uri, server_api=ServerApi('1'))
+    db = client['INCI']
+    d = db.Ingredienti.find({}, {"_id":0, "Nome_comune":1})
+    #print(type(d))
+    ingredienti = transform_cursor_to_list(d)
+    y = ingredienti[z]
+    bho = db.Ingredienti.find_one(y)
+    return bho
+
 
 schema = {
   "type": "object",
@@ -79,30 +105,14 @@ schema = {
 #print(sperofunzioni(11))
 lab = sperofunzioni(11)
 
-#unit test
-collection = [
-    {"_id": 1, "nome": "Mario", "età": 30, "città": "Roma"},
-    {"_id": 2, "nome": "Luigi", "età": 25, "città": "Milano"},
-    {"_id": 3, "nome": "Peach", "età": 28, "città": "Napoli"},
-    {"_id": 4, "nome": "Toad", "età": 22, "città": "Torino"},
-    {"_id": 5, "nome": "Daisy", "età": 27, "città": "Bologna"},
-    {"_id": 6, "nome": "Wario", "età": 35, "città": "Firenze"},
-    {"_id": 7, "nome": "Yoshi", "età": 20, "città": "Palermo"},
-    {"_id": 8, "nome": "Birdo", "età": 32, "città": "Genova"},
-    {"_id": 9, "nome": "Koopa", "età": 31, "città": "Venezia"},
-    {"_id": 10, "nome": "Kamek", "età": 29, "città": "Catania"},
-    {"_id": 11, "nome": "Nabbit", "età": 24, "città": "Verona"},
-    {"_id": 12, "nome": "Lemmy", "età": 26, "città": "Bari"},
-    {"_id": 13, "nome": "Iggy", "età": 23, "città": "Trieste"},
-    {"_id": 14, "nome": "Ludwig", "età": 36, "città": "Reggio Calabria"},
-    {"_id": 15, "nome": "Roy", "età": 33, "città": "Messina"},
-    {"_id": 16, "nome": "Morton", "età": 34, "città": "Modena"},
-    {"_id": 17, "nome": "Wendy", "età": 29, "città": "Ravenna"},
-    {"_id": 18, "nome": "Pinky", "età": 21, "città": "L'Aquila"},
-    {"_id": 19, "nome": "Puff", "età": 28, "città": "Sassari"},
-    {"_id": 20, "nome": "Shy Guy", "età": 22, "città": "Catanzaro"}
-]
-print(type(collection))
+#test assert
+def test_crea_dizionario():
+    output = lab
+    assert isinstance(output, dict) == True
+    for chiave in output.keys():
+        assert isinstance(chiave, str) == True
+    for valore in output.values():
+        assert isinstance(valore, str) == True
 
 #test json schema
 def validate_wrapper(instance, schema):
