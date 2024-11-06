@@ -19,7 +19,7 @@ def MyHttpTrigger(req: func.HttpRequest) -> func.HttpResponse:
             name = req_body.get('name')
 
     if name:
-        return func.HttpResponse(f"Hello, {sperofunzioni(int(name))}. This HTTP triggered function executed successfully.")
+        return func.HttpResponse(f"Valori LD50 ingrediente: {sperofunzioni(int(name))}")
     else:
         return func.HttpResponse(
              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",

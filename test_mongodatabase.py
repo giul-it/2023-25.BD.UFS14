@@ -106,7 +106,7 @@ schema = {
 lab = sperofunzioni(11)
 
 #test assert
-def test_crea_dizionario():
+def test_diz():
     output = lab
     assert isinstance(output, dict) == True
     for chiave in output.keys():
