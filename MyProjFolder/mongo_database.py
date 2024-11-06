@@ -26,5 +26,5 @@ def sperofunzioni(z):
     return bho
 
 
-print(sperofunzioni(11))
+#print(sperofunzioni(11))
 
